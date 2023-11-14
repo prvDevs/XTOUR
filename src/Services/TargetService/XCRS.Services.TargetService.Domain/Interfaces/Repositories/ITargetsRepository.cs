@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using XCRS.Services.Core.Domain.Interfaces.Infrastructure.Repository;
+using XCRS.Services.TargetService.Domain.Entities;
 
 namespace XCRS.Services.TargetService.Domain.Interfaces.Repositories
 {
-    internal class ITargetsRepository
+    public interface ITargetsRepository : IGenericMongoDbRepository<Target>
     {
     }
 }

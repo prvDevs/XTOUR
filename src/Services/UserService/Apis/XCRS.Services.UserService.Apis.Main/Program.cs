@@ -25,15 +25,15 @@ builder.Services
 
 builder.Services.AddFastEndpoints();
 builder.Services.SwaggerDocument(o =>
+{
+    o.MaxEndpointVersion = 1;
+    o.DocumentSettings = s =>
     {
-        o.MaxEndpointVersion = 1;
-        o.DocumentSettings = s =>
-        {
-            s.DocumentName = "v1";
-            s.Title = "XCRS v1";
-            s.Version = "v1";
-        };
-    });
+        s.DocumentName = "v1";
+        s.Title = "XCRS v1";
+        s.Version = "v1";
+    };
+});
     //.SwaggerDocument(o =>
     //{
     //    o.MaxEndpointVersion = 2;

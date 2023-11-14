@@ -14,12 +14,11 @@
     <Folder Include="Domain\Consts\" />
     <Folder Include="Domain\Dtos\" />
     <Folder Include="Domain\Enums\" />
-    <Folder Include="Domain\Interfaces\Infrastructure\" />
-    <Folder Include="Infrastructure\Repository\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FastEndpoints" Version="5.19.0" />
+    <PackageReference Include="MongoDB.Driver" Version="2.22.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.0.3" />
 	  

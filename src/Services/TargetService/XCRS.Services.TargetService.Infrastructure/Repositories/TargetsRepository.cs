@@ -5,9 +5,9 @@ using XCRS.Services.TargetService.Domain.Interfaces.Repositories;
 
 namespace XCRS.Services.TargetService.Infrastructure.Repositories
 {
-    public class TargetRepository : GenericMongoDbRepository<Target>, ITargetsRepository
+    public class TargetsRepository : GenericMongoDbRepository<Target>, ITargetsRepository
     {
-        public TargetRepository(IMongoDbSettings settings) :  base(settings){ 
+        public TargetsRepository(IMongoDbSettings settings) :  base(settings){ 
         }
     }
 }
