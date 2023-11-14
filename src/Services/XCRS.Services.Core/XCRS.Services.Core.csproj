@@ -14,7 +14,8 @@
     <Folder Include="Domain\Consts\" />
     <Folder Include="Domain\Dtos\" />
     <Folder Include="Domain\Enums\" />
-    <Folder Include="Domain\Interfaces\" />
+    <Folder Include="Domain\Interfaces\Infrastructure\" />
+    <Folder Include="Infrastructure\Repository\" />
   </ItemGroup>
 
   <ItemGroup>
