@@ -1,5 +1,7 @@
 using FastEndpoints.Swagger;
+using Microsoft.Extensions.Options;
 using XCRS.Services.Core;
+using XCRS.Services.Core.Domain.Settings;
 using XCRS.Services.TargetService.Application;
 using XCRS.Services.TargetService.Helper;
 using XCRS.Services.TargetService.Infrastructure;
@@ -17,6 +19,10 @@ builder.Services
     .AddHelper(builder.Configuration)
     .AddInfrastructure(builder.Configuration)
     .AddApplication(builder.Configuration);
+
+builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection("MongoDbSettings"));
+builder.Services.AddSingleton<IMongoDbSettings>(serviceProvider =>
+    serviceProvider.GetRequiredService<IOptions<MongoDbSettings>>().Value);
 
 // Add services to the container.
 builder.Services.AddControllers();

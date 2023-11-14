@@ -1,10 +1,12 @@
 ﻿
 using MongoDB.Bson.Serialization.Attributes;
 using XCRS.Core.Entities.UserService.Core.Entities;
+using XCRS.Services.Core.Application.Customizations.Attributes;
 
 namespace XCRS.Services.TargetService.Domain.Entities
 {
 
+    [BsonCollection("targets")]
     public class Target : BaseEntity
     {
         [BsonElement("name")]
