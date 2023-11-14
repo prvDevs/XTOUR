@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Exceptions\**" />
+    <Compile Remove="UseCases\EventHandlers\**" />
+    <EmbeddedResource Remove="Exceptions\**" />
+    <EmbeddedResource Remove="UseCases\EventHandlers\**" />
+    <None Remove="Exceptions\**" />
+    <None Remove="UseCases\EventHandlers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Customizations\Exceptions\" />
+    <Folder Include="Customizations\Middlewares\" />
+    <Folder Include="Configs\" />
+    <Folder Include="Customizations\Authroizations\" />
+    <Folder Include="UseCases\Commands\Cases\Target\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GraphQL" Version="7.6.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\XCRS.Services.Core\XCRS.Services.Core.csproj" />
+    <ProjectReference Include="..\XCRS.Services.UserService.Domain\XCRS.Services.UserService.Domain.csproj" />
+    <ProjectReference Include="..\XCRS.Services.UserService.Helper\XCRS.Services.UserService.Helper.csproj" />
+    <ProjectReference Include="..\XCRS.Services.UserService.Infrastructure\XCRS.Services.UserService.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

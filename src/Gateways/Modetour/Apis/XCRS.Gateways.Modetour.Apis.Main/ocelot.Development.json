@@ -1,0 +1,64 @@
+{
+  "Routes": [
+    // ----- FOR User - START -----
+    {
+      "DownstreamPathTemplate": "/api/user/{url}",
+      "DownstreamScheme": "http", //http https      
+      "UpstreamPathTemplate": "/api/user/{url}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Patch", "Delete" ],
+      "SwaggerKey": "userService",
+
+      //"LoadBalancerOptions": {
+      //  "Type": "RoundRobin"
+      //},
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5198
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [ "modetour.land" ]
+      },
+      //"RouteClaimsRequirement": {
+      //  "role": "Land"
+      //}
+    }
+    // ----- FOR User - END -----
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "userService",
+      "TransformByOcelotConfig": false,
+      "Config": [
+        //"TakeServersFromDownstreamService": true
+        //,"Version": "v1"
+        //"Config": [
+        //  {
+        //    "Name": "User",
+        //    "Version": "v1",
+        //    "Service": {
+        //      "Name": "user",
+        //      "Path": "/swagger/v1/swagger.json"
+        //    }
+        //  }
+        //]
+        //,"Url": "http://localhost:5198/swagger/v1/swagger.json"
+        //}
+        {
+          "Name": "User Service API",
+          "Version": "v1",
+          "Url": "http://localhost:5198/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "RequestIdKey": "MainOcRequestId",
+    //"BaseUrl": "http://localhost:5014",
+    "UpstreamHeaderTransform": {
+      "X-Forwarded-For": "{RemoteIpAddress}"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\XCRS.Services.Core\XCRS.Services.Core.csproj" />
+    <ProjectReference Include="..\XCRS.Services.TargetService.Domain\XCRS.Services.TargetService.Domain.csproj" />
+    <ProjectReference Include="..\XCRS.Services.TargetService.Helper\XCRS.Services.TargetService.Helper.csproj" />
+  </ItemGroup>
+
+</Project>

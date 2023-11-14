@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Application\Exceptions\" />
+    <Folder Include="Application\Extensions\" />
+    <Folder Include="Application\Middlewares\" />
+    <Folder Include="Application\Configs\" />
+    <Folder Include="Domain\Consts\" />
+    <Folder Include="Domain\Dtos\" />
+    <Folder Include="Domain\Enums\" />
+    <Folder Include="Domain\Interfaces\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FastEndpoints" Version="5.19.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.0.3" />
+	  
+  </ItemGroup>
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\XCRS.Core\XCRS.Core.csproj" />
+	</ItemGroup>
+</Project>

@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FastEndpoints" Version="5.19.2" />
+    <PackageReference Include="FastEndpoints.Swagger" Version="5.19.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\XCRS.Services.Core\XCRS.Services.Core.csproj" />
+    <ProjectReference Include="..\..\XCRS.Services.TargetService.Application\XCRS.Services.TargetService.Application.csproj" />
+    <ProjectReference Include="..\..\XCRS.Services.TargetService.Domain\XCRS.Services.TargetService.Domain.csproj" />
+    <ProjectReference Include="..\..\XCRS.Services.TargetService.Helper\XCRS.Services.TargetService.Helper.csproj" />
+    <ProjectReference Include="..\..\XCRS.Services.TargetService.Infrastructure\XCRS.Services.TargetService.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\TestDb\" />
+  </ItemGroup>
+
+</Project>

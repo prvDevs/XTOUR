@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Application\Exceptions\**" />
+    <EmbeddedResource Remove="Application\Exceptions\**" />
+    <None Remove="Application\Exceptions\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Application\Customizations\Middlewares\" />
+    <Folder Include="Application\Customizations\Exceptions\" />
+    <Folder Include="Domain\Dtos\" />
+    <Folder Include="Domain\Enums\" />
+    <Folder Include="Domain\Interfaces\" />
+    <Folder Include="Utility\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.13" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\XCRS.Modetour.Core\XCRS.Modetour.Core.csproj" />
+  </ItemGroup>
+</Project>

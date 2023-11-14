@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FastEndpoints" Version="5.19.2" />
+    <PackageReference Include="FastEndpoints.Swagger" Version="5.19.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\XCRS.Core\XCRS.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\..\XCRS.Modetour.Core\XCRS.Modetour.Core.csproj" />
+    <ProjectReference Include="..\..\..\XCRS.Services.UserService.Domain\XCRS.Services.UserService.Domain.csproj" />
+    <ProjectReference Include="..\..\..\XCRS.Services.UserService.Helper\XCRS.Services.UserService.Helper.csproj" />
+    <ProjectReference Include="..\..\..\XCRS.Services.UserService.Infrastructure\XCRS.Services.UserService.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\User\AddUser\V1\" />
+  </ItemGroup>
+
+</Project>
