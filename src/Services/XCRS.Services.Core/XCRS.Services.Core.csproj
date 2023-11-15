@@ -7,12 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Application\Exceptions\" />
-    <Folder Include="Application\Extensions\" />
-    <Folder Include="Application\Middlewares\" />
+    <Compile Remove="Application\Extensions\**" />
+    <Compile Remove="Application\Middlewares\**" />
+    <EmbeddedResource Remove="Application\Extensions\**" />
+    <EmbeddedResource Remove="Application\Middlewares\**" />
+    <None Remove="Application\Extensions\**" />
+    <None Remove="Application\Middlewares\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Application\Configs\" />
+    <Folder Include="Application\Customizations\Exceptions\" />
     <Folder Include="Domain\Consts\" />
-    <Folder Include="Domain\Dtos\" />
     <Folder Include="Domain\Enums\" />
   </ItemGroup>
 

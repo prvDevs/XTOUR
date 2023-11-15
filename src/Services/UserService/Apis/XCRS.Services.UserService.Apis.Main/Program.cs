@@ -30,7 +30,7 @@ builder.Services.SwaggerDocument(o =>
     o.DocumentSettings = s =>
     {
         s.DocumentName = "v1";
-        s.Title = "XCRS v1";
+        s.Title = "XCRS User Service v1";
         s.Version = "v1";
     };
 });

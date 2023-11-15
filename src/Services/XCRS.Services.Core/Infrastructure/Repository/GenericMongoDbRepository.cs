@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
+using SharpCompress.Common;
 using System.Linq.Expressions;
 using XCRS.Core.Entities.UserService.Core.Entities;
 using XCRS.Services.Core.Application.Customizations.Attributes;
@@ -81,22 +82,39 @@ namespace XCRS.Services.Core.Infrastructure.Repository
 
         public virtual void InsertOne(TDocument document)
         {
+            var createdAtProperty = typeof(TDocument).GetProperty("CreatedAt");
+            createdAtProperty?.SetValue(document, DateTime.Now);
+
             _collection.InsertOne(document);
         }
 
         public virtual Task InsertOneAsync(TDocument document)
         {
+            var createdAtProperty = typeof(TDocument).GetProperty("CreatedAt");
+            createdAtProperty?.SetValue(document, DateTime.Now);
+
             return Task.Run(() => _collection.InsertOneAsync(document));
         }
 
         public void InsertMany(ICollection<TDocument> documents)
         {
+            var createdAtProperty = typeof(TDocument).GetProperty("CreatedAt");
+            for (int i = 0; i < documents.Count; i++) {
+                createdAtProperty?.SetValue(documents.ElementAt(i), DateTime.Now);
+            }
             _collection.InsertMany(documents);
         }
 
 
         public virtual async Task InsertManyAsync(ICollection<TDocument> documents)
         {
+            var createdAtProperty = typeof(TDocument).GetProperty("CreatedAt");
+            for (int i = 0; i < documents.Count; i++)
+            {
+                createdAtProperty?.SetValue(documents.ElementAt(i), DateTime.Now);
+            }
+
+
             await _collection.InsertManyAsync(documents);
         }
 

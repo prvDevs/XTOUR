@@ -4,14 +4,13 @@ using System.Net;
 using XCRS.Core.Domain.Dtos;
 using XCRS.Services.UserService.Domain.Dtos.UseCases.Commands.Handlers.Requests;
 using XCRS.Services.UserService.Domain.Dtos.UseCases.Commands.Handlers.Responses;
-using XCRS.Services.UserService.Domain.Dtos.Features.User;
-using XCRS.Services.UserService.Domain.Dtos.Features;
+using XCRS.Services.UserService.Application.Bases.Endpoints;
 
 namespace XCRS.Services.UserService.Apis.Main.Features.User.AddUser.V1
 {
     [ProducesResponseType(typeof(Response<AddUserHandlerResp>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(Response), (int)HttpStatusCode.BadRequest)]
-    public class AddUserAsync : BaseUserEndpoint<AddUserReq, Response<AddUserHandlerResp>>
+    public class AddUserAsync : BaseUserCommandHandlerEndpoint<AddUserHandlerReq, Response<AddUserHandlerResp>>
     {
         private readonly IUserCommandHandler _userCommandHandler;
 
@@ -37,15 +36,9 @@ namespace XCRS.Services.UserService.Apis.Main.Features.User.AddUser.V1
             });
         }
 
-        public override async Task HandleAsync(AddUserReq req, CancellationToken cancellationToken)
+        public override async Task HandleAsync(AddUserHandlerReq req, CancellationToken cancellationToken)
         {
-            AddUserHandlerReq addUserHandlerReq = new()
-            {
-                LoginId = req.LoginId,
-                Name = req.Name,
-                Age = req.Age,
-            };
-            Response<AddUserHandlerResp> response = await _userCommandHandler.AddUserHandlerAsync(addUserHandlerReq, cancellationToken);
+            Response<AddUserHandlerResp> response = await _userCommandHandler.AddUserHandlerAsync(req, cancellationToken);
 
             await SendAsync(response);
         }

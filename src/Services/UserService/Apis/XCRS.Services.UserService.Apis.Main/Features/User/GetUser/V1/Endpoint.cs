@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using XCRS.Core.Domain.Dtos;
-using XCRS.Services.UserService.Domain.Dtos.Features;
-using XCRS.Services.UserService.Domain.Dtos.Features.User;
+using XCRS.Services.UserService.Application.Bases.Endpoints;
 using XCRS.Services.UserService.Domain.Dtos.UseCases.Queries.Handlers.Requests;
 using XCRS.Services.UserService.Domain.Dtos.UseCases.Queries.Handlers.Responses;
 using XCRS.Services.UserService.Domain.Interfaces.Application.UseCases.Quereis;
@@ -11,7 +10,7 @@ namespace XCRS.Services.UserService.Apis.Main.Features.User.GetUser.V1
 {
     [ProducesResponseType(typeof(Response<GetUserHandlerResp?>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(Response), (int)HttpStatusCode.BadRequest)]
-    public class GetUser : BaseUserEndpoint<GetUserReq, Response<GetUserHandlerResp>>
+    public class GetUser : BaseUserQueryHandlerEndpoint<GetUserHandlerReq, Response<GetUserHandlerResp>>
     {
         private readonly IUserQueryHandler _userQueryHandler;
    
@@ -42,7 +41,7 @@ namespace XCRS.Services.UserService.Apis.Main.Features.User.GetUser.V1
             //});
         }
 
-        public override async Task HandleAsync(GetUserReq req, CancellationToken cancellationToken)
+        public override async Task HandleAsync(GetUserHandlerReq req, CancellationToken cancellationToken)
         {
             GetUserHandlerReq getUserHandlerReq = new()
             {

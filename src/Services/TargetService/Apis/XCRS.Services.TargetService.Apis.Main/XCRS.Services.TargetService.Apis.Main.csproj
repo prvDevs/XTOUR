@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <Folder Include="Data\TestDb\" />
+    <Folder Include="Features\Target\GetTarget\" />
   </ItemGroup>
 
 </Project>

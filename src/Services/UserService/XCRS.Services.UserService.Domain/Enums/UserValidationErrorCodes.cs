@@ -4,7 +4,6 @@ namespace XCRS.Services.UserService.Domain.Enums
 {
     public record UserValidationErrorCodes : EnumerationUtil<UserValidationErrorCodes>
     {
-
         public string SystemMessage { get; set; }
         public string DisplayMessage { get; set; }
 

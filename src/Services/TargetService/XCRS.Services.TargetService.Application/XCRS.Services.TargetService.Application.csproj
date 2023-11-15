@@ -13,4 +13,9 @@
     <ProjectReference Include="..\XCRS.Services.TargetService.Infrastructure\XCRS.Services.TargetService.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UseCases\Queries\Cases\" />
+    <Folder Include="UseCases\Queries\Handlers\" />
+  </ItemGroup>
+
 </Project>

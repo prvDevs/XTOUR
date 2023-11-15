@@ -1,6 +1,6 @@
 ﻿namespace XCRS.Services.UserService.Domain.Dtos.UseCases.Queries.Handlers.Responses
 {
-    public class GetUserHandlerResp
+    public class GetUserHandlerResp : BaseUserQueryHandlerResp
     {
         public Object? Id { get; set; }
         public string? LoginId { get; set; }

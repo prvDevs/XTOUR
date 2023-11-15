@@ -1,4 +1,4 @@
-﻿using XCRS.Services.UserService.Application.Customizations.Extensions;
+﻿using XCRS.Services.Core.Application.Customizations.Extensions;
 using XCRS.Services.UserService.Domain.Interfaces.Infrastructure.Repositories;
 using XCRS.Core.Domain.Dtos;
 using XCRS.Services.UserService.Application.UseCases.Queries.Cases;
@@ -42,9 +42,9 @@ namespace XCRS.Services.UserService.Application.UseCases.Queries.Handlers
                 if (!getUserByIdCaseResp.IsSuccess)
                 {
                     if (getUserByIdCaseResp.ErrorResult.IsInvalid)
-                        r.AddUserServiceValidatorErrorMessage(getUserByIdCaseResp.ErrorResult.ErrorValues);
+                        r.AddCustomServiceValidatorErrorMessage(getUserByIdCaseResp.ErrorResult.ErrorValues);
                     else
-                        r.AddUserDefaultErrorMessage(getUserByIdCaseResp.ErrorResult.ErrorValues);
+                        r.AddCustomDefaultErrorMessage(getUserByIdCaseResp.ErrorResult.ErrorValues);
 
                     return r;
                 }
@@ -64,7 +64,7 @@ namespace XCRS.Services.UserService.Application.UseCases.Queries.Handlers
             }
             catch (Exception ex)
             {
-                r.AddUserServiceException(ex);
+                r.AddCustomServiceException(ex);
             }
 
             return r;

@@ -1,5 +1,5 @@
 ﻿using XCRS.Core.Domain.Dtos;
-using XCRS.Services.UserService.Application.Customizations.Extensions;
+using XCRS.Services.Core.Application.Customizations.Extensions;
 using XCRS.Services.UserService.Application.UseCases.Commands.Cases;
 using XCRS.Services.UserService.Domain.Dtos.UseCases.Commands.Cases.Requests;
 using XCRS.Services.UserService.Domain.Dtos.UseCases.Commands.Cases.Responses;
@@ -43,7 +43,7 @@ namespace Modetour.XCRS.Services.UserService.Application.UseCases.Commands.Handl
                     if (!addUserCaseResp.IsSuccess)
                     {
                         if (addUserCaseResp.ErrorResult.IsInvalid)
-                            r.AddUserServiceValidatorErrorMessage(addUserCaseResp.ErrorResult.ErrorValues);
+                            r.AddCustomServiceValidatorErrorMessage(addUserCaseResp.ErrorResult.ErrorValues);
                         return r;
                     }
                     #endregion
@@ -67,7 +67,7 @@ namespace Modetour.XCRS.Services.UserService.Application.UseCases.Commands.Handl
             }
             catch (Exception ex)
             {
-                r.AddUserServiceException(ex);
+                r.AddCustomServiceException(ex);
             }
 
             return r;

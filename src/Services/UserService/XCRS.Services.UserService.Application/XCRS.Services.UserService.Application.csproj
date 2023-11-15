@@ -20,7 +20,6 @@
     <Folder Include="Customizations\Middlewares\" />
     <Folder Include="Configs\" />
     <Folder Include="Customizations\Authroizations\" />
-    <Folder Include="UseCases\Commands\Cases\Target\" />
   </ItemGroup>
 
   <ItemGroup>

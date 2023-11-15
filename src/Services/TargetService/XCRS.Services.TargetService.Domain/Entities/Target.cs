@@ -9,8 +9,17 @@ namespace XCRS.Services.TargetService.Domain.Entities
     [BsonCollection("targets")]
     public class Target : BaseEntity
     {
-        [BsonElement("name")]
-        public required string Name { get; set; }
+        [BsonElement("code")]
+        public required string Code { get; set; }
+        [BsonElement("targetBi")]
+        public required TargetBi TargetBi { get; set; }
+        [BsonElement("targetResource")]
+        public required TargetResource TargetResource { get; set; }
+    }
+
+    public class TargetBi {
+        [BsonElement("nameEn")]
+        public required string NameEn { get; set; }
         [BsonElement("nameKo")]
         public required string NameKo { get; set; }
         [BsonElement("domain")]
@@ -23,8 +32,6 @@ namespace XCRS.Services.TargetService.Domain.Entities
         public required string Ceo { get; set; }
         [BsonElement("email")]
         public required string Email { get; set; }
-        [BsonElement("targetResource")]
-        public required TargetResource TargetResource { get; set; }
     }
 
     public class TargetResource {
