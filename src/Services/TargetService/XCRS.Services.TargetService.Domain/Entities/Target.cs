@@ -1,5 +1,9 @@
 ﻿
+using FastEndpoints;
+using HotChocolate;
 using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson.Serialization.IdGenerators;
+using System.ComponentModel.DataAnnotations.Schema;
 using XCRS.Core.Entities.UserService.Core.Entities;
 using XCRS.Services.Core.Application.Customizations.Attributes;
 
@@ -7,31 +11,39 @@ namespace XCRS.Services.TargetService.Domain.Entities
 {
 
     [BsonCollection("targets")]
-    public class Target : BaseEntity
+    public class Target : IBaseEntity
     {
+        [BsonElement("_id")]
+        [BsonId(IdGenerator = typeof(ObjectIdGenerator))]
+        [Column(Order = 1)]
+        public Object? Id { get; set; }
+        //[GraphQLIgnore]
         [BsonElement("code")]
-        public required string Code { get; set; }
+        public string? Code { get; set; }
         [BsonElement("targetBi")]
-        public required TargetBi TargetBi { get; set; }
+        public TargetBi? TargetBi { get; set; }
         [BsonElement("targetResource")]
-        public required TargetResource TargetResource { get; set; }
+        public TargetResource? TargetResource { get; set; }
+        [BsonElement("createdAt")]
+        [Column(Order = 987)]
+        public DateTime CreatedAt { get; set; }
     }
 
     public class TargetBi {
         [BsonElement("nameEn")]
-        public required string NameEn { get; set; }
+        public string? NameEn { get; set; }
         [BsonElement("nameKo")]
-        public required string NameKo { get; set; }
+        public string? NameKo { get; set; }
         [BsonElement("domain")]
-        public required string Domain { get; set; }
+        public string? Domain { get; set; }
         [BsonElement("phoneNo")]
-        public required string PhoneNo { get; set; }
+        public string? PhoneNo { get; set; }
         [BsonElement("address")]
-        public required string Address { get; set; }
+        public string? Address { get; set; }
         [BsonElement("ceo")]
-        public required string Ceo { get; set; }
+        public string? Ceo { get; set; }
         [BsonElement("email")]
-        public required string Email { get; set; }
+        public string? Email { get; set; }
     }
 
     public class TargetResource {

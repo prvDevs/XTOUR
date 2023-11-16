@@ -1,23 +1,25 @@
-﻿using MongoDB.Bson;
+﻿using Microsoft.EntityFrameworkCore;
+using MongoDB.Bson;
 using MongoDB.Driver;
-using SharpCompress.Common;
+using System;
 using System.Linq.Expressions;
 using XCRS.Core.Entities.UserService.Core.Entities;
 using XCRS.Services.Core.Application.Customizations.Attributes;
+using XCRS.Services.Core.Domain.Interfaces.Infrastructure.Contexts;
 using XCRS.Services.Core.Domain.Interfaces.Infrastructure.Repository;
-using XCRS.Services.Core.Domain.Settings;
 
 namespace XCRS.Services.Core.Infrastructure.Repository
 {
     public class GenericMongoDbRepository<TDocument> : IGenericMongoDbRepository<TDocument>
     where TDocument : IBaseEntity
     {
+        protected readonly IMongoDatabase _context;
         private readonly IMongoCollection<TDocument> _collection;
 
-        public GenericMongoDbRepository(IMongoDbSettings settings)
+        public GenericMongoDbRepository(IMongoContext context)
         {
-            var database = new MongoClient(settings.ConnectionString).GetDatabase(settings.DatabaseName);
-            _collection = database.GetCollection<TDocument>(GetCollectionName(typeof(TDocument)));
+            _context = context.Database;
+            _collection = _context.GetCollection<TDocument>(GetCollectionName(typeof(TDocument)));
         }
 
         private protected string? GetCollectionName(Type documentType)
@@ -32,6 +34,11 @@ namespace XCRS.Services.Core.Infrastructure.Repository
             }
 
             return r;
+        }
+
+        public async Task<IEnumerable<TDocument>> GetAllAsync()
+        {
+            return (await _collection.FindAsync(_ => true).ConfigureAwait(false)).ToEnumerable();
         }
 
         public virtual IQueryable<TDocument> AsQueryable()
@@ -83,7 +90,7 @@ namespace XCRS.Services.Core.Infrastructure.Repository
         public virtual void InsertOne(TDocument document)
         {
             var createdAtProperty = typeof(TDocument).GetProperty("CreatedAt");
-            createdAtProperty?.SetValue(document, DateTime.Now);
+            createdAtProperty?.SetValue(document, DateTime.UtcNow);
 
             _collection.InsertOne(document);
         }
@@ -91,44 +98,76 @@ namespace XCRS.Services.Core.Infrastructure.Repository
         public virtual Task InsertOneAsync(TDocument document)
         {
             var createdAtProperty = typeof(TDocument).GetProperty("CreatedAt");
-            createdAtProperty?.SetValue(document, DateTime.Now);
+            createdAtProperty?.SetValue(document, DateTime.UtcNow);
 
             return Task.Run(() => _collection.InsertOneAsync(document));
         }
 
-        public void InsertMany(ICollection<TDocument> documents)
+        public void InsertMany(ICollection<TDocument> documents, bool genCreatedAt = false)
         {
-            var createdAtProperty = typeof(TDocument).GetProperty("CreatedAt");
-            for (int i = 0; i < documents.Count; i++) {
-                createdAtProperty?.SetValue(documents.ElementAt(i), DateTime.Now);
+            if (genCreatedAt) {
+                var createdAtProperty = typeof(TDocument).GetProperty("CreatedAt");
+                for (int i = 0; i < documents.Count; i++)
+                {
+                    createdAtProperty?.SetValue(documents.ElementAt(i), DateTime.UtcNow);
+                }
             }
+            
             _collection.InsertMany(documents);
         }
 
 
-        public virtual async Task InsertManyAsync(ICollection<TDocument> documents)
+        public virtual async Task InsertManyAsync(ICollection<TDocument> documents, bool genCreatedAt = false)
         {
-            var createdAtProperty = typeof(TDocument).GetProperty("CreatedAt");
-            for (int i = 0; i < documents.Count; i++)
+            if (genCreatedAt)
             {
-                createdAtProperty?.SetValue(documents.ElementAt(i), DateTime.Now);
-            }
+                var createdAtProperty = typeof(TDocument).GetProperty("CreatedAt");
+                for (int i = 0; i < documents.Count; i++)
+                {
+                    createdAtProperty?.SetValue(documents.ElementAt(i), DateTime.UtcNow);
+                }
 
+            }
 
             await _collection.InsertManyAsync(documents);
         }
 
         public void ReplaceOne(TDocument document)
         {
+            var updatedAtProperty = typeof(TDocument).GetProperty("UpdatedAt");
+            updatedAtProperty?.SetValue(document, DateTime.UtcNow);
+
             var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, document.Id);
             _collection.FindOneAndReplace(filter, document);
         }
 
         public virtual async Task ReplaceOneAsync(TDocument document)
         {
+            var updatedAtProperty = typeof(TDocument).GetProperty("UpdatedAt");
+            updatedAtProperty?.SetValue(document, DateTime.UtcNow);
+
             var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, document.Id);
             await _collection.FindOneAndReplaceAsync(filter, document);
         }
+
+        public void DeleteOneFlag(TDocument document)
+        {
+            var isDeletedProperty = typeof(TDocument).GetProperty("IsDeleted");
+            isDeletedProperty?.SetValue(document, DateTime.UtcNow);
+
+            var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, document.Id);
+            _collection.FindOneAndReplace(filter, document);
+        }
+
+        public virtual async Task DeleteOneFlagAsync(TDocument document)
+        {
+            var isDeletedProperty = typeof(TDocument).GetProperty("IsDeleted");
+            isDeletedProperty?.SetValue(document, DateTime.UtcNow);
+
+            var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, document.Id);
+            await _collection.FindOneAndReplaceAsync(filter, document);
+        }
+
 
         public void DeleteOne(Expression<Func<TDocument, bool>> filterExpression)
         {

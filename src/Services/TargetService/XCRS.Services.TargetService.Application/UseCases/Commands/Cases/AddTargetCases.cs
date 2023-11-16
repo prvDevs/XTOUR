@@ -10,10 +10,10 @@ namespace XCRS.Services.TargetService.Application.UseCases.Commands.Cases
 {
     public class AddTargetCases : IAddTargetCases
     {
-        private readonly ITargetsRepository _targetsRepository;
-        public AddTargetCases(ITargetsRepository targetsRepository)
+        private readonly IUnitOfWork _uow;
+        public AddTargetCases(IUnitOfWork uow)
         {
-            _targetsRepository = targetsRepository;
+            _uow = uow;
         }
 
         public async Task<AddTargetCaseResp> AddTargetCase(AddTargetCaseReq req, CancellationToken cancellationToken)
@@ -65,7 +65,7 @@ namespace XCRS.Services.TargetService.Application.UseCases.Commands.Cases
                 }
             };
 
-            await _targetsRepository.InsertOneAsync(target).ConfigureAwait(false);
+            await _uow.TargetRepository.InsertOneAsync(target).ConfigureAwait(false);
             #endregion
 
             #region Result

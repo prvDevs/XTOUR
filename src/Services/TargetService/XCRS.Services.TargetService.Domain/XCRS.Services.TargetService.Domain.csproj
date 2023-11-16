@@ -11,6 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="HotChocolate.Abstractions" Version="13.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\XCRS.Services.Core\XCRS.Services.Core.csproj" />
   </ItemGroup>
 

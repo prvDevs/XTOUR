@@ -5,6 +5,8 @@ namespace XCRS.Services.Core.Domain.Interfaces.Infrastructure.Repository
 {
     public interface IGenericMongoDbRepository<TDocument> where TDocument : IBaseEntity
     {
+        Task<IEnumerable<TDocument>> GetAllAsync();
+
         IQueryable<TDocument> AsQueryable();
 
         IEnumerable<TDocument> FilterBy(
@@ -26,13 +28,17 @@ namespace XCRS.Services.Core.Domain.Interfaces.Infrastructure.Repository
 
         Task InsertOneAsync(TDocument document);
 
-        void InsertMany(ICollection<TDocument> documents);
+        void InsertMany(ICollection<TDocument> documents, bool genCreatedAt = false);
 
-        Task InsertManyAsync(ICollection<TDocument> documents);
+        Task InsertManyAsync(ICollection<TDocument> documents, bool genCreatedAt = false);
 
         void ReplaceOne(TDocument document);
 
         Task ReplaceOneAsync(TDocument document);
+
+        void DeleteOneFlag(TDocument document);
+
+        Task DeleteOneFlagAsync(TDocument document);
 
         void DeleteOne(Expression<Func<TDocument, bool>> filterExpression);
 

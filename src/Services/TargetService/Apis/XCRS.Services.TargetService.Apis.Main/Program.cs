@@ -23,6 +23,7 @@ builder.Services
     .AddApplication(builder.Configuration);
 
 builder.Services.AddFastEndpoints();
+builder.Services.AddGraphQLServer();
 builder.Services.SwaggerDocument(o =>
 {
     o.MaxEndpointVersion = 1;
@@ -96,5 +97,6 @@ app.UseHttpsRedirection();
 //app.UseAuthorization();
 
 app.MapControllers();
+app.MapGraphQL();
 
 app.Run();
