@@ -7,11 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\UseCases\Queries\" />
+    <Folder Include="Dtos\UseCases\Commands\Cases\Responses\" />
+    <Folder Include="Dtos\UseCases\Queries\Cases\Requests\" />
+    <Folder Include="Dtos\UseCases\Queries\Cases\Responses\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="HotChocolate.Abstractions" Version="13.7.0" />
+    <PackageReference Include="HotChocolate.Types" Version="13.7.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,11 +1,18 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿using HotChocolate;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson.Serialization.IdGenerators;
 using System.ComponentModel.DataAnnotations.Schema;
 using XCRS.Core.Entities.UserService.Core.Entities;
 
 namespace XCRS.Services.UserService.Core.Entities
 {
-    public class User : BaseEntity
+    public class User : IBaseEntity
     {
+        //[GraphQLType(typeof(IdType))]
+        [BsonElement("_id")]
+        [BsonId(IdGenerator = typeof(ObjectIdGenerator))]
+        [Column(Order = 1)]
+        public object? Id { get; set; }
         public required string LoginId { get; set; }
         public required string Name { get; set; }
         public int Age { get; set; }
@@ -14,6 +21,9 @@ namespace XCRS.Services.UserService.Core.Entities
         {
             return Age + 1;
         }
+        [BsonElement("createdAt")]
+        [Column(Order = 987)]
+        public DateTime CreatedAt { get; set; }
 
         [Column(Order = 989)]
         [BsonElement("createdBy")]

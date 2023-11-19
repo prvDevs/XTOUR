@@ -20,8 +20,4 @@
     <PackageReference Include="HotChocolate.Types" Version="13.7.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="UseCases\Queries\Cases\" />
-  </ItemGroup>
-
 </Project>

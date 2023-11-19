@@ -1,18 +1,20 @@
 ﻿using XCRS.Services.TargetService.Domain.Entities;
 using XCRS.Services.TargetService.Domain.Interfaces.Repositories;
+using XCRS.Services.TargetService.Domain.Interfaces.UseCases.Queries.Cases;
 
 namespace XCRS.Services.TargetService.Application.UseCases.Queries
 {
     public class TargetQuery 
     {
-        private readonly IUnitOfWork _uow;
-        public TargetQuery(IUnitOfWork uow)
+        private readonly IGetTargetCases _getTargetCases;
+        public TargetQuery(IGetTargetCases getTargetCases)
         {
-            _uow = uow;
+            _getTargetCases = getTargetCases;
         }
 
-        public async Task<IEnumerable<Target>> GetTargets() => await _uow.TargetRepository.GetAllAsync().ConfigureAwait(false);
-
-        public async Task<Target> GetTargetById(string id) => await _uow.TargetRepository.FindByIdAsync(id).ConfigureAwait(false);
+        public async Task<IEnumerable<Target>> GetTargets() 
+            => await _getTargetCases.GetTargetsAsync().ConfigureAwait(false);
+        public async Task<Target> GetTargetById(string id) 
+            => await _getTargetCases.GetTargetByIdAsync(id).ConfigureAwait(false);
     }
 }

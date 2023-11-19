@@ -1,6 +1,6 @@
-﻿
-using FastEndpoints;
+﻿using HotChocolate.Types;
 using HotChocolate;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.IdGenerators;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,10 +13,11 @@ namespace XCRS.Services.TargetService.Domain.Entities
     [BsonCollection("targets")]
     public class Target : IBaseEntity
     {
+        [GraphQLType(typeof(IdType))]        
         [BsonElement("_id")]
-        [BsonId(IdGenerator = typeof(ObjectIdGenerator))]
-        [Column(Order = 1)]
-        public Object? Id { get; set; }
+        [BsonId(IdGenerator = typeof(ObjectIdGenerator))]        
+        [Column(Order = 1)]        
+        public object? Id { get; set; }
         //[GraphQLIgnore]
         [BsonElement("code")]
         public string? Code { get; set; }

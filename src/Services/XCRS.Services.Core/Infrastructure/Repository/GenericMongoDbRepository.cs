@@ -72,7 +72,7 @@ namespace XCRS.Services.Core.Infrastructure.Repository
         public virtual TDocument FindById(string id)
         {
             var objectId = new ObjectId(id);
-            var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, objectId);
+            var filter = Builders<TDocument>.Filter.Eq("_id", objectId);
             return _collection.Find(filter).SingleOrDefault();
         }
 
@@ -81,7 +81,7 @@ namespace XCRS.Services.Core.Infrastructure.Repository
             return Task.Run(() =>
             {
                 var objectId = new ObjectId(id);
-                var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, objectId);
+                var filter = Builders<TDocument>.Filter.Eq("_id", objectId);
                 return _collection.Find(filter).SingleOrDefaultAsync();
             });
         }
@@ -137,7 +137,7 @@ namespace XCRS.Services.Core.Infrastructure.Repository
             var updatedAtProperty = typeof(TDocument).GetProperty("UpdatedAt");
             updatedAtProperty?.SetValue(document, DateTime.UtcNow);
 
-            var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, document.Id);
+            var filter = Builders<TDocument>.Filter.Eq("_id", document.Id);
             _collection.FindOneAndReplace(filter, document);
         }
 
@@ -146,7 +146,7 @@ namespace XCRS.Services.Core.Infrastructure.Repository
             var updatedAtProperty = typeof(TDocument).GetProperty("UpdatedAt");
             updatedAtProperty?.SetValue(document, DateTime.UtcNow);
 
-            var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, document.Id);
+            var filter = Builders<TDocument>.Filter.Eq("_id", document.Id);
             await _collection.FindOneAndReplaceAsync(filter, document);
         }
 
@@ -155,7 +155,7 @@ namespace XCRS.Services.Core.Infrastructure.Repository
             var isDeletedProperty = typeof(TDocument).GetProperty("IsDeleted");
             isDeletedProperty?.SetValue(document, DateTime.UtcNow);
 
-            var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, document.Id);
+            var filter = Builders<TDocument>.Filter.Eq("_id", document.Id);
             _collection.FindOneAndReplace(filter, document);
         }
 
@@ -164,7 +164,7 @@ namespace XCRS.Services.Core.Infrastructure.Repository
             var isDeletedProperty = typeof(TDocument).GetProperty("IsDeleted");
             isDeletedProperty?.SetValue(document, DateTime.UtcNow);
 
-            var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, document.Id);
+            var filter = Builders<TDocument>.Filter.Eq("_id", document.Id);
             await _collection.FindOneAndReplaceAsync(filter, document);
         }
 
@@ -182,7 +182,7 @@ namespace XCRS.Services.Core.Infrastructure.Repository
         public void DeleteById(string id)
         {
             var objectId = new ObjectId(id);
-            var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, objectId);
+            var filter = Builders<TDocument>.Filter.Eq("_id", objectId);
             _collection.FindOneAndDelete(filter);
         }
 
@@ -191,7 +191,7 @@ namespace XCRS.Services.Core.Infrastructure.Repository
             return Task.Run(() =>
             {
                 var objectId = new ObjectId(id);
-                var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, objectId);
+                var filter = Builders<TDocument>.Filter.Eq("_id", objectId);
                 _collection.FindOneAndDeleteAsync(filter);
             });
         }

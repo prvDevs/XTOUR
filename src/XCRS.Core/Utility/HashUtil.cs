@@ -8,7 +8,7 @@ namespace XCRS.Core.Utility
         public static string GetHashData(string data)
         {
             //create new instance of md5
-            MD5 md5 = MD5CryptoServiceProvider.Create();
+            MD5 md5 = MD5.Create();
 
             //convert the input text to array of bytes
             byte[] hashData = md5.ComputeHash(Encoding.Default.GetBytes(data));

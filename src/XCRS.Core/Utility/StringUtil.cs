@@ -19,9 +19,9 @@ namespace XCRS.Core.Utility
                 if (obj == null) 
                     return string.Empty;
                 
-                return obj.ToString().Trim();
+                return obj.ToString()?.Trim() ?? string.Empty;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return string.Empty;
             }
@@ -41,20 +41,22 @@ namespace XCRS.Core.Utility
             return result;
         }
 
-        public static string? ConvertObjectToString(object obj)
+        public static string ConvertObjectToString(object? obj)
         {
             string result = string.Empty;
             //Migration Issue : obj 예외 처리
             if (obj == null)
                 return result;
+            else {
 
-            if (obj.GetType() == typeof(string))
-            {
-                result = obj.ToString();
-            }
-            else
-            {
-                result = JsonConvert.SerializeObject(obj, Formatting.Indented);
+                if (obj.GetType() == typeof(string))
+                {
+                    result = obj.ToString() ?? string.Empty;
+                }
+                else
+                {
+                    result = JsonConvert.SerializeObject(obj, Formatting.Indented);
+                }
             }
             return result;
         }

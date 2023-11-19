@@ -8,6 +8,9 @@ using XCRS.Services.TargetService.Domain.Interfaces.UseCases.Commands.Cases;
 using HotChocolate.Types;
 using XCRS.Core.Entities.UserService.Core.Entities;
 using XCRS.Services.TargetService.Domain.Entities;
+using MongoDB.Bson;
+using XCRS.Services.TargetService.Domain.Interfaces.UseCases.Queries.Cases;
+using XCRS.Services.TargetService.Application.UseCases.Queries.Cases;
 
 namespace XCRS.Services.TargetService.Application
 {
@@ -18,6 +21,9 @@ namespace XCRS.Services.TargetService.Application
 
             #region Cases
             services.AddScoped<IAddTargetCases, AddTargetCases>();
+
+
+            services.AddScoped<IGetTargetCases, GetTargetCases>();            
             #endregion
 
             #region CommandHandlers
@@ -27,6 +33,9 @@ namespace XCRS.Services.TargetService.Application
 
             #region Queries
             services.AddGraphQLServer()
+                    //.AddTypeConverter<string, ObjectId>(from => ObjectId.Parse(from))
+                    .AddTypeConverter<ObjectId, string>(from => from.ToString())
+                    .BindRuntimeType<ObjectId, IdType>()                  
                     .AddQueryType<TargetQuery>(); 
             #endregion
 

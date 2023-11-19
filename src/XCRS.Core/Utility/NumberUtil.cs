@@ -24,7 +24,7 @@ namespace XCRS.Core.Utility
                     return result;
                 return 0;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return 0;
             }
@@ -43,7 +43,7 @@ namespace XCRS.Core.Utility
                     }
                 return 0;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return 0;
             }
@@ -59,7 +59,7 @@ namespace XCRS.Core.Utility
                     return result;
                 return 0;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return 0;
             }
@@ -78,7 +78,7 @@ namespace XCRS.Core.Utility
                     return result;
                 return 0;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return 0;
             }

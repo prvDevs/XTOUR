@@ -1,6 +1,8 @@
 using FastEndpoints;
 using FastEndpoints.Swagger;
+using HotChocolate.Types;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using System.Text.Json;
 using XCRS.Services.Core;
 using XCRS.Services.Core.Application.Customizations.FastEndpoints.PreProcessers;
@@ -14,7 +16,7 @@ var configuration = builder.Configuration
  .SetBasePath(Directory.GetCurrentDirectory())
  .AddJsonFile($"appsettings.json", optional: false)
  .AddJsonFile($"appsettings.{env}.json", optional: true)
-.AddEnvironmentVariables();
+ .AddEnvironmentVariables();
 
 builder.Services
     .AddCore(builder.Configuration)
@@ -23,7 +25,7 @@ builder.Services
     .AddApplication(builder.Configuration);
 
 builder.Services.AddFastEndpoints();
-builder.Services.AddGraphQLServer();
+
 builder.Services.SwaggerDocument(o =>
 {
     o.MaxEndpointVersion = 1;
@@ -40,6 +42,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSwaggerGen();
+
 
 var app = builder.Build();
 app.UseCors(b => b

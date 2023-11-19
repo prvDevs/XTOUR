@@ -18,13 +18,10 @@ namespace XCRS.Services.TargetService.Application.UseCases.Commands
 
         #region Add
         public async Task<Response<AddTargetHandlerResp>> AddTargetHandlerAsync(AddTargetHandlerReq req, CancellationToken cancellationToken)
-        {
-            return await new AddTargetHandler(_addTargetCases).HandleAsync(req, cancellationToken);
-        }
+            => await new AddTargetHandler(_addTargetCases).HandleAsync(req, cancellationToken);
         #endregion
-
+        
         #region Update
-
         #endregion
 
         #region Delete
