@@ -30,7 +30,6 @@ namespace XCRS.Services.TargetService.Application
             services.AddScoped<ITargetCommandHandler, TargetCommandHandler>();
             #endregion
 
-
             #region Queries
             services.AddGraphQLServer()
                     //.AddTypeConverter<string, ObjectId>(from => ObjectId.Parse(from))

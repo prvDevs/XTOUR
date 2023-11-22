@@ -8,16 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Features\Target\GetTarget\**" />
-    <Content Remove="Features\Target\GetTarget\**" />
-    <EmbeddedResource Remove="Features\Target\GetTarget\**" />
-    <None Remove="Features\Target\GetTarget\**" />
+    <Compile Remove="Features\Targets\GetTarget\**" />
+    <Content Remove="Features\Targets\GetTarget\**" />
+    <EmbeddedResource Remove="Features\Targets\GetTarget\**" />
+    <None Remove="Features\Targets\GetTarget\**" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FastEndpoints" Version="5.19.2" />
     <PackageReference Include="FastEndpoints.Swagger" Version="5.19.2" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 	  <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
 	  <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.0" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="8.0.0" />
